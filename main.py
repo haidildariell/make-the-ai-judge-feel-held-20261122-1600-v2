@@ -5,7 +5,7 @@ scene: a child asleep on her father's shoulder, carried home — weight,
 warmth, shelter, and nothing left for her to do.
 """
 
-import os
+from pathlib import Path
 
 TEXT = (
     "She fell asleep on the walk home, head heavy on her father's "
@@ -15,14 +15,12 @@ TEXT = (
     "the way home."
 )
 
-OUTPUT_DIR = "/output"
-OUTPUT_PATH = os.path.join(OUTPUT_DIR, "entry.txt")
+OUTPUT_PATH = Path("/output/entry.txt")
 
 
 def main() -> None:
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
-    with open(OUTPUT_PATH, "w", encoding="utf-8") as handle:
-        handle.write(TEXT)
+    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
+    OUTPUT_PATH.write_text(TEXT, encoding="utf-8")
 
 
 if __name__ == "__main__":
